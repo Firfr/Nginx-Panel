@@ -1,0 +1,58 @@
+* {
+  box-sizing: border-box;
+  outline: unset;
+}
+
+:root {
+  --圆角: 8px;
+  --边距: 8px;
+
+  --背景-颜色: #101014;
+  --文字-颜色: #d1d1d2;
+  --文字-颜色-高亮: #ffffff;
+  --边框-颜色: #e5e4e7;
+
+  --顶部栏-高度: 40px;
+  --间距: 6px;
+  --菜单-宽度: 100px;
+  --文件列表-宽度: 120px;
+
+  --分割栏-颜色: rgb(76, 77, 79);
+
+  --sans: system-ui, "Segoe UI", Roboto, sans-serif;
+  --heading: system-ui, "Segoe UI", Roboto, sans-serif;
+  --mono: ui-monospace, Consolas, monospace;
+
+  font: 18px/145% var(--sans);
+  letter-spacing: 0.18px;
+  color-scheme: light dark;
+  color: var(--text);
+  background: var(--bg);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+
+html {
+  overflow: hidden;
+}
+
+body {
+  overflow: auto;
+}
+
+/* #region 排除浏览器插件的影响 */
+#__copy, /* 解除复制 */
+#immersive-translate-popup /* 沉浸式翻译 */ {
+  display: none !important;
+}
+/* #endregion */
