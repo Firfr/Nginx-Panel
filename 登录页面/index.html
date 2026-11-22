@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="zh-CN" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%201024%201024'%3E%3Cpath%20d='M%20925.072%20866.338%20c%20-22.55%20-58.665%20-54.879%20-111.396%20-96.079%20-156.727%20c%20-41.419%20-45.572%20-89.732%20-81.389%20-143.598%20-106.458%20a%20428.81%20428.81%200%200%200%20-31.037%20-12.991%20c%2023.153%20-13.107%2044.673%20-29.438%2063.998%20-48.763%20c%2056.076%20-56.076%2086.959%20-130.633%2086.959%20-209.936%20s%20-30.881%20-153.86%20-86.959%20-209.936%20s%20-130.634%20-86.959%20-209.937%20-86.959%20s%20-153.86%2030.883%20-209.937%2086.959%20c%20-56.076%2056.078%20-86.959%20130.633%20-86.959%20209.936%20s%2030.883%20153.86%2086.959%20209.936%20c%2019.325%2019.325%2040.846%2035.655%2063.997%2048.763%20a%20429.898%20429.898%200%200%200%20-31.037%2012.991%20c%20-53.866%2025.068%20-102.179%2060.884%20-143.598%20106.458%20c%20-41.202%2045.332%20-75.248%2097.431%20-96.08%20156.727%20c%20-17.385%2049.481%20-15.568%2098.351%20-16.45%20121.174%20h%2069.838%20C%20142.848%20824.515%20297.84%20633.689%20508.42%20633.689%20c%20210.579%200%20369.644%20197.809%20370.256%20353.823%20h%2069.837%20c%20-1.243%20-44.114%20-0.159%20-60.62%20-23.438%20-121.174%20Z%20M%20281.379%20331.462%20c%200%20-125.188%20101.85%20-227.038%20227.039%20-227.038%20c%20125.188%200%20227.039%20101.85%20227.039%20227.038%20S%20633.606%20558.5%20508.418%20558.5%20c%20-125.189%200%20-227.039%20-101.85%20-227.039%20-227.038%20Z'%20fill='%2367c23a'%3E%3C/path%3E%3C/svg%3E"
+    />
+    <title>登录</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        outline: unset;
+      }
+      :root {
+        --间距: 8px;
+
+        --背景-颜色: #101014;
+        --文字-颜色: #d1d1d2;
+
+        --sans: system-ui, "Segoe UI", Roboto, sans-serif;
+        --heading: system-ui, "Segoe UI", Roboto, sans-serif;
+        --mono: ui-monospace, Consolas, monospace;
+
+        font: 18px/145% var(--sans);
+        letter-spacing: 0.18px;
+        color-scheme: light dark;
+        color: var(--文字-颜色);
+        background: var(--背景-颜色);
+        font-synthesis: none;
+        text-rendering: optimizeLegibility;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+      }
+
+      #id_app {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        padding: var(--间距);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+    </style>
+    <script>
+      window.有验证码 = "有验证码";
+    </script>
+  </head>
+  <body>
+    <div id="id_app"></div>
+    <script type="module" src="./src/main.ts"></script>
+  </body>
+</html>

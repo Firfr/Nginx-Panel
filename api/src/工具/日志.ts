@@ -1,20 +1,31 @@
 export const env_日志等级 = (Bun.env.LOG_LEVEL || "").toLowerCase();
 
-const 日志等级对照 = {
-  trace: { 名称: "跟踪", 权重: 10 },
-  debug: { 名称: "调试", 权重: 20 },
-  info: { 名称: "信息", 权重: 30 },
-  warn: { 名称: "警告", 权重: 40 },
-  error: { 名称: "错误", 权重: 50 },
-  fatal: { 名称: "程序崩溃", 权重: 60 },
+export const 日志等级对照 = {
+  trace: { 名称: "跟踪", 权重: 10, 颜色: "\x1b[90m" },
+  debug: { 名称: "调试", 权重: 20, 颜色: "\x1b[36m" },
+  info: { 名称: "信息", 权重: 30, 颜色: "\x1b[32m" },
+  warn: { 名称: "警告", 权重: 40, 颜色: "\x1b[33m" },
+  error: { 名称: "错误", 权重: 50, 颜色: "\x1b[31m" },
+  fatal: { 名称: "程序崩溃", 权重: 60, 颜色: "\x1b[35m" },
 } as const;
 
-const 日志等级 =
+const 设置等级 =
   env_日志等级 in 日志等级对照
     ? 日志等级对照[env_日志等级 as keyof typeof 日志等级对照]
     : 日志等级对照.info;
 
-const 显示时间 = 日志等级.权重 <= 20;
+const 显示时间 = 设置等级.权重 <= 20;
+
+const 时间格式化器 = new Intl.DateTimeFormat("sv-SE", {
+  timeZone: "Asia/Shanghai",
+  year: "numeric",
+  month: "2-digit",
+  day: "2-digit",
+  hour: "2-digit",
+  minute: "2-digit",
+  second: "2-digit",
+  hour12: false,
+});
 
 /**
  * 创建一个自定义日志工具实例
@@ -30,10 +41,10 @@ const 显示时间 = 日志等级.权重 <= 20;
 const fn创建日志实例 = (文件路径?: string) => {
   // 修改：接收任意数量的参数
   const fn执行日志输出 = (
-    级别数值: (typeof 日志等级对照)[keyof typeof 日志等级对照]["权重"],
+    调用级别: (typeof 日志等级对照)[keyof typeof 日志等级对照],
     ...args: any[]
   ) => {
-    if (日志等级.权重 > 级别数值) {
+    if (设置等级.权重 > 调用级别.权重) {
       return;
     }
 
@@ -43,12 +54,12 @@ const fn创建日志实例 = (文件路径?: string) => {
 
     // 调试模式：带时间
     if (显示时间) {
-      const 标准时间格式 = new Date().toISOString().replace("T", " ").split(".")[0];
-      前缀 = `[${标准时间格式}] [${日志等级.名称}]${路径展示}：`;
+      const 标准时间 = 时间格式化器.format(new Date());
+      前缀 = `[${标准时间}] ${调用级别.颜色}[${调用级别.名称}]\x1b[0m${路径展示}`;
     }
     // 普通模式：无时间
     else {
-      前缀 = `[${日志等级.名称}]${路径展示} `;
+      前缀 = `[${调用级别.名称}]${路径展示} `;
     }
 
     // 将前缀作为第一个参数，后续参数原样透传
@@ -59,17 +70,17 @@ const fn创建日志实例 = (文件路径?: string) => {
   // 对外暴露的日志方法，修改为接受可变参数
   return {
     // 跟踪 trace
-    trace: (...args: any[]) => fn执行日志输出(10, ...args),
+    trace: (...args: any[]) => fn执行日志输出(日志等级对照.trace, ...args),
     // 调试 debug
-    debug: (...args: any[]) => fn执行日志输出(20, ...args),
+    debug: (...args: any[]) => fn执行日志输出(日志等级对照.debug, ...args),
     // 信息 info
-    info: (...args: any[]) => fn执行日志输出(30, ...args),
+    info: (...args: any[]) => fn执行日志输出(日志等级对照.info, ...args),
     // 警告 warn
-    warn: (...args: any[]) => fn执行日志输出(40, ...args),
+    warn: (...args: any[]) => fn执行日志输出(日志等级对照.warn, ...args),
     // 错误 error
-    error: (...args: any[]) => fn执行日志输出(50, ...args),
+    error: (...args: any[]) => fn执行日志输出(日志等级对照.error, ...args),
     // 崩溃 fatal
-    fatal: (...args: any[]) => fn执行日志输出(60, ...args),
+    fatal: (...args: any[]) => fn执行日志输出(日志等级对照.fatal, ...args),
   };
 };
 

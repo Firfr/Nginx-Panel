@@ -30,20 +30,21 @@ else
     --hostname nginx \
     --network host --cpus=2  --memory=2G \
     -e BUN_INSTALL_REGISTRY=http://npm.firfe.de5.net \
-    -e LOG_LEVEL=debug \
+    -e LOG_LEVEL=trace \
+    -e PORT=1235 \
     -e PANEL_NAME=1Panel \
     -e PANEL_URL=1024 \
     -e EDIT_NAME=1Panel \
     -e EDIT_URL=1024 \
     -v /usr/local/bin/bun:/usr/local/bin/bun \
     -v /usr/local/bin/bun:/usr/local/bin/bunx \
-    -v ./ncf:/usr/local/bin/ncf \
+    -v ./ncf-amd64:/usr/local/bin/ncf \
     -v /etc/localtime:/etc/localtime:ro \
     -v /etc/timezone:/etc/timezone:ro \
     -v ./ts-调试/log:/var/log/nginx \
     -v ./ts-调试/data:/data \
     -w /app -v ./:/app \
     --entrypoint bash \
-    docker.code.firfe.work/nginx:1.31.6-trixie \
+    docker.code.firfe.work/nginx:1.30.6-trixie \
     -c 'printf "cd api\ncd web\nbun dev\n" >> ~/.bash_history; exec bash'
 fi

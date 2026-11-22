@@ -19,6 +19,10 @@
 
   --分割栏-颜色: rgb(76, 77, 79);
 
+  --滚动条-宽度: 6px;
+  --滚动条-颜色: rgba(255, 255, 255, 0.2);
+  --滚动条-悬浮颜色: rgba(255, 255, 255, 0.4);
+
   --sans: system-ui, "Segoe UI", Roboto, sans-serif;
   --heading: system-ui, "Segoe UI", Roboto, sans-serif;
   --mono: ui-monospace, Consolas, monospace;
@@ -26,8 +30,8 @@
   font: 18px/145% var(--sans);
   letter-spacing: 0.18px;
   color-scheme: light dark;
-  color: var(--text);
-  background: var(--bg);
+  color: var(--文字-颜色);
+  background: var(--背景-颜色);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -40,14 +44,236 @@ body {
   padding: 0;
   width: 100%;
   height: 100%;
-}
-
-html {
   overflow: hidden;
 }
 
-body {
-  overflow: auto;
+.分类内容 {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  gap: var(--间距);
+  flex-direction: column;
+  align-items: center;
+  overflow-x: hidden;
+
+  & > * {
+    width: 100%;
+  }
+
+  & > .标题 {
+    overflow-x: scroll;
+    flex-shrink: 0;
+
+    padding: 0 10px;
+    display: flex;
+    gap: var(--间距);
+    align-items: center;
+
+    & > div {
+      margin: auto;
+      padding-bottom: var(--间距);
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      gap: var(--间距);
+
+      white-space: nowrap;
+    }
+  }
+}
+
+.内容左右贴边 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.内容居中 {
+  display: flex;
+  gap: var(--间距);
+  align-items: center;
+  justify-content: center;
+}
+
+.卡片容器父级 {
+  container-type: inline-size;
+  container-name: 卡片容器父级;
+
+  .卡片容器 {
+    overflow: auto;
+
+    display: grid;
+    gap: var(--间距);
+
+    & > .卡片 {
+      min-width: 154px;
+      height: min-content;
+      border: 2px solid transparent;
+      border-radius: var(--间距);
+      padding: var(--间距);
+      background-color: rgba(104, 104, 104, 0.1);
+
+      text-align: start;
+      overflow: hidden;
+
+      display: flex;
+      gap: var(--间距);
+      flex-direction: column;
+      justify-content: space-between;
+
+      cursor: pointer;
+
+      transition: border-color 300ms ease;
+
+      &:hover {
+        border-color: rgb(30, 165, 76);
+      }
+
+      & > * {
+        width: 100%;
+      }
+    }
+  }
+}
+@container 卡片容器父级 (min-width: 410px) {
+  .卡片容器 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@container 卡片容器父级 (min-width: 620px) {
+  .卡片容器 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@container 卡片容器父级 (min-width: 830px) {
+  .卡片容器 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@container 卡片容器父级 (min-width: 1040px) {
+  .卡片容器 {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+@container 卡片容器父级 (min-width: 1250px) {
+  .卡片容器 {
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
+
+.滚动条预留宽度 {
+  scrollbar-gutter: stable;
+  scrollbar-width: var(--滚动条-宽度);
+}
+
+/* 整个滚动条 */
+::-webkit-scrollbar {
+  width: var(--滚动条-宽度);
+  height: var(--滚动条-宽度);
+}
+
+/* 滚动条 首尾箭头 */
+::-webkit-scrollbar-button {
+  display: none;
+}
+
+/* 滚动条 滑块 */
+::-webkit-scrollbar-thumb {
+  border-radius: calc(var(--滚动条-宽度) / 2);
+  background: var(--滚动条-颜色);
+
+  transition: background-color 0.2s ease;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--滚动条-悬浮颜色);
+}
+
+/* 可拖动调整大小的手柄 */
+::-webkit-resizer {
+  display: none;
+}
+
+.el-button.无间距.无间距 {
+  margin: 0;
+}
+
+.el-button.小边距.小边距 {
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+.el-input.小边距 {
+  .el-input__wrapper {
+    padding-left: 4px;
+    padding-right: 4px;
+  }
+}
+
+.el-radio-group.小边距 {
+  label > span {
+    padding-left: 4px;
+    padding-right: 4px;
+  }
+}
+
+.el-dialog.不换行 {
+  min-width: fit-content;
+  .el-dialog__header {
+    min-width: fit-content;
+    .el-dialog__title {
+      white-space: nowrap;
+    }
+  }
+}
+
+.el-dialog.弹窗 {
+  width: 500px;
+  max-width: 94%;
+
+  .el-dialog__body {
+    display: flex;
+    gap: var(--间距);
+    flex-direction: column;
+    align-items: center;
+
+    & > * {
+      width: 100%;
+    }
+  }
+}
+
+.el-dialog.示例弹窗 {
+  width: 500px;
+  max-width: 96%;
+  max-height: 96%;
+
+  display: flex;
+  flex-direction: column;
+
+  .el-dialog__body {
+    flex: 1;
+    overflow: auto;
+
+    pre {
+      margin: 0;
+    }
+  }
+}
+
+.el-form.表单 {
+  .el-form-item.不换行 {
+    .el-form-item__content {
+      display: flex;
+      gap: var(--间距);
+      flex-direction: row;
+      flex-wrap: nowrap;
+    }
+  }
 }
 
 /* #region 排除浏览器插件的影响 */

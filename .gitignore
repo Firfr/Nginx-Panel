@@ -4,9 +4,17 @@
 
 !README.md
 
-!ncf
+!ncf-amd64
+!ncf-arm64
 !docker-entrypoint.sh
+!Dockerfile
 !code.sh
+
+!登录页面
+!登录页面/login.html
+
+!公共代码
+!公共代码/*.ts
 
 !api
 !api/README.md
@@ -19,8 +27,14 @@
 !api/src/工具/*.ts
 !api/src/中间件
 !api/src/中间件/*.ts
+!api/src/数据
+!api/src/数据/*.ts
 !api/src/路由
 !api/src/路由/*.ts
+!api/src/路由/*/
+!api/src/路由/*/*.ts
+!api/src/路由/*/*/
+!api/src/路由/*/*/*.ts
 
 !web
 !web/README.md
@@ -32,6 +46,7 @@
 !web/public
 !web/public/favicon.svg
 !web/src
+!web/src/全局共享数据.ts
 !web/src/vite-env.d.ts
 !web/src/style.css
 !web/src/main.ts
@@ -41,7 +56,16 @@
 !web/src/工具/*.ts
 !web/src/组件
 !web/src/组件/*.vue
-!web/src/组件/文件操作
-!web/src/组件/文件操作/*.vue
-!web/src/组件/文件操作/操作按钮
-!web/src/组件/文件操作/操作按钮/*.vue
+!web/src/组件/*/
+!web/src/组件/*/*.vue
+!web/src/组件/*/*/
+!web/src/组件/*/*/*.vue
+
+!登录页面/
+!登录页面/vite.config.ts
+!登录页面/bun.lock
+!登录页面/index.html
+!登录页面/*.json
+!登录页面/src
+!登录页面/src/main.ts
+!登录页面/src/App.vue

@@ -1,6 +1,6 @@
 import type { Context, Next } from "hono";
 import fn创建日志实例 from "../工具/日志";
-import { t_返回 } from "../类型";
+import { t_返回 } from "@公共代码/类型";
 
 const log = fn创建日志实例("中间件/响应内容格式化.ts");
 
@@ -14,6 +14,8 @@ function fn返回内容(文本: string): unknown {
 
 const fn响应格式化 = async (c: Context, next: Next) => {
   await next();
+
+  if (c.get("中间件_跳过格式化") === true) return c.res;
 
   // 非 2xx 直接返回，交给 onError / 后续处理
   if (c.res.status < 200 || c.res.status >= 300) return c.res;
@@ -32,7 +34,10 @@ const fn响应格式化 = async (c: Context, next: Next) => {
   const 新响应头 = new Headers(c.res.headers);
   新响应头.set("Content-Type", "application/json; charset=utf-8");
 
-  c.res = new Response(JSON.stringify(返回内容), { status: c.res.status, headers: 新响应头 });
+  c.res = new Response(JSON.stringify(返回内容), {
+    status: c.res.status,
+    headers: 新响应头,
+  });
 
   log.trace(`【${c.req.path}】响应内容格式化完成`);
 

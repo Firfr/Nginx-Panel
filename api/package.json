@@ -2,12 +2,19 @@
   "name": "api",
   "scripts": {
     "dev": "bun run --hot src/index.ts",
-    "build": "bun build src/index.ts --target=bun --outfile=dist/index.js"
+    "build": "bun build src/index.ts --target=bun --outfile=dist/index.js",
+    "check": "echo '检查可格式化文件' && bun fmt --no-script --check src || true",
+    "fix": "echo '格式化文件' && bun fmt --no-script src",
+    "out": "echo '检查可更新依赖' && bun outdated",
+    "up": "echo '检查可更新依赖' bun update"
   },
   "dependencies": {
-    "hono": "^4.13.8"
+    "@hono/bun": "^1.0.1",
+    "hono": "^4.13.17",
+    "otplib": "^13.6.0"
   },
   "devDependencies": {
-    "@types/bun": "latest"
+    "@types/bun": "latest",
+    "@types/jsonwebtoken": "^9.0.10"
   }
 }

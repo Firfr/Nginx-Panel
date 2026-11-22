@@ -1,18 +1,4 @@
-interface t_请求结果_成功 {
-  状态: true;
-  信息?: string;
-  内容: any;
-}
-
-interface t_请求结果_失败 {
-  状态: false;
-  信息: string;
-  内容?: any;
-}
-
-export type t_请求结果 = t_请求结果_成功 | t_请求结果_失败;
-
-export type t_菜单名称 = "配置" | "conf.d" | "stream" | "证书" | "基本认证" | "静态资源";
+export type t_菜单名称 = "账号" | "配置" | "conf.d" | "stream" | "证书" | "基本认证" | "静态资源";
 
 export interface t_菜单 {
   名称: t_菜单名称;

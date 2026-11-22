@@ -3,6 +3,7 @@
 # 基础镜像使用 基于Debian的
 
 chmod +x /usr/local/bin/bun
+ln -s /usr/local/bin/bun /usr/local/bin/bunx
 chmod +x /usr/local/bin/bunx
 chmod +x /usr/local/bin/ncf
 

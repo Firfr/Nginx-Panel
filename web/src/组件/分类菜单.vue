@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { const_菜单列表, ref_选中文件, ref_选中菜单 } from "../工具/全局共享数据";
+import { const_菜单列表, ref_选中文件, ref_选中菜单 } from "../全局共享数据";
 import type { t_菜单 } from "../类型";
 
 const fn是否选中 = (菜单: t_菜单) => ref_选中菜单.value && ref_选中菜单.value.名称 === 菜单.名称;
@@ -10,7 +10,7 @@ const fn是否选中 = (菜单: t_菜单) => ref_选中菜单.value && ref_选�
     <div
       class="菜单"
       v-for="菜单 in const_菜单列表"
-      :class="{ 选中: fn是否选中(菜单) }"
+      :class="{ 选中: fn是否选中(菜单), 账号: 菜单.名称 === '账号' }"
       @click="
         ref_选中菜单 = 菜单;
         ref_选中文件 = '';
@@ -33,7 +33,7 @@ const fn是否选中 = (菜单: t_菜单) => ref_选中菜单.value && ref_选�
   align-items: flex-start;
 
   .菜单 {
-    height: 56px;
+    height: 40px;
     width: 100%;
     padding-left: var(--间距);
 
@@ -51,7 +51,11 @@ const fn是否选中 = (菜单: t_菜单) => ref_选中菜单.value && ref_选�
     }
   }
   .选中 {
-    color: rgb(64, 158, 255);
+    color: #409eff;
+  }
+  .账号 {
+    border-radius: var(--间距) 0 0 var(--间距);
+    background-color: #18222b;
   }
 }
 </style>
