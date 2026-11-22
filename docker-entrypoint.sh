@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/ash
 
 # 基础镜像使用 基于Debian的
 

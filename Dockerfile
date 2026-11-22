@@ -1,5 +1,5 @@
 # 编译服
-FROM --platform=$BUILDPLATFORM docker.code.firfe.work/oven/bun:1.4.4-debian AS builder
+FROM --platform=$BUILDPLATFORM docker.code.firfe.work/oven/bun:1.4.4-alpine AS builder
 ENV BUN_INSTALL_REGISTRY=http://npm.firfe.de5.net
 
 COPY 公共代码 /app/公共代码
@@ -25,11 +25,14 @@ RUN cp -r /app/web/dist /app/api/dist/web
 ## 设置权限
 RUN chmod -R +r /app/api/dist
 
-FROM docker.code.firfe.work/oven/bun:1.4.4-debian AS bun
+FROM docker.code.firfe.work/oven/bun:1.4.4-alpine AS bun
 
 # 最终镜像
-FROM docker.code.firfe.work/nginx:1.30.6-trixie
+FROM docker.code.firfe.work/nginx:1.30.6-alpine3.24-slim
 ARG TARGETARCH
+
+RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories && \
+    apk add --no-cache libstdc++ libgcc
 
 WORKDIR /app
 COPY --from=builder /app/api/dist /app
