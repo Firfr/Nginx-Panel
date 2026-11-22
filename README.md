@@ -26,7 +26,7 @@ name: nginx-panel
 services:
   nginx-panel:
     container_name: nginx-panel
-    image: firfe/nginx-panel:1.0
+    image: firfe/nginx-panel:1.1
     network_mode: host # bridge
     restart: always
     tty: true
@@ -42,5 +42,6 @@ services:
         max-size: "1M"
         max-file: "1"
     volumes:
+      # - ./nginx-log:/var/log/nginx
       - ./data:/data
 ```
