@@ -4,9 +4,17 @@
 
 ## 环境变量
 
-| 名称 | 是否必须 | 默认值 | 说明 |
-| ---- | -------- | ------ | ---- |
-|      |          |        |      |
+| 名称       | 是否必须 | 默认值   | 说明       |
+| ---------- | -------- | -------- | ---------- |
+| PORT       | 否       | 5193     | 监听端口   |
+| HOST       | 否       | 所有地址 | 监听地址   |
+| LOG_LEVEL  | 否       | info     | 日志等级   |
+| PANEL_NAME | 否       | 无       | 面板名称   |
+| PANEL_URL  | 否       | 无       | 面板地址   |
+| EDIT_NAME  | 否       | 无       | 编辑器名称 |
+| EDIT_URL   | 否       | 无       | 编辑器地址 |
+
+上面的 面板/编辑器 地址中如果协议和主机与本软件相同可以只写端口。
 
 默认端口 5193 ，可通过环境变量 `PORT` 自定义
 
@@ -25,6 +33,10 @@ services:
     stdin_open: true
     cpus: 1
     mem_limit: 1G
+    # environment:
+    #   PORT: 1234
+    #   PANEL_NAME: 飞牛
+    #   PANEL_URL: 5666
     logging:
       options:
         max-size: "1M"

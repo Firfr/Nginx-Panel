@@ -12,12 +12,12 @@ if (Number.isInteger(环境变量_端口) && 环境变量_端口 > 0) {
   配置.端口 = 环境变量_端口;
 }
 
-if (process.env.PANEL_NAME) {
+if (Bun.env.PANEL_NAME) {
   if (!("面板" in 配置)) 配置.面板 = {};
-  配置.面板!.名称 = process.env.PANEL_NAME;
+  配置.面板!.名称 = Bun.env.PANEL_NAME;
 }
-if (process.env.PANEL_URL) {
-  const url = process.env.PANEL_URL.trim();
+if (Bun.env.PANEL_URL) {
+  const url = Bun.env.PANEL_URL.trim();
   if (!("面板" in 配置)) 配置.面板 = {};
 
   // 判断是否包含协议（http:// 或 https://）或 IP/域名
@@ -32,13 +32,13 @@ if (process.env.PANEL_URL) {
   }
 }
 
-if (process.env.EDIT_NAME) {
+if (Bun.env.EDIT_NAME) {
   if (!("编辑" in 配置)) 配置.编辑 = {};
-  配置.编辑!.名称 = process.env.EDIT_NAME;
+  配置.编辑!.名称 = Bun.env.EDIT_NAME;
 }
 
-if (process.env.EDIT_URL) {
-  const url = process.env.EDIT_URL.trim();
+if (Bun.env.EDIT_URL) {
+  const url = Bun.env.EDIT_URL.trim();
   if (!("编辑" in 配置)) 配置.编辑 = {};
 
   // 判断是否包含协议（http:// 或 https://）或 IP/域名
