@@ -277,7 +277,7 @@ const fn登录 = async () => {
       </el-form-item>
 
       <div style="display: flex; justify-content: center">
-        <el-button type="success" @click="fn登录"> 添加 </el-button>
+        <el-button type="success" @click="fn登录"> 登录 </el-button>
       </div>
     </el-form>
   </div>

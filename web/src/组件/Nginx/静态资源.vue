@@ -1,13 +1,7 @@
 <script setup lang="ts">
 import { computed } from "vue";
 import { cmp_当前文件列表, ref_配置, ref_选中菜单 } from "../../全局共享数据";
-import { fn获取菜单文件列表, fn获取配置, fn鼠标滚轮横向滚动 } from "../../工具/其他工具";
-
-const fn获取服务端配置 = async () => {
-  if (ref_配置.value.端口 !== 0) return;
-  fn获取配置();
-};
-fn获取服务端配置();
+import { fn获取菜单文件列表, fn鼠标滚轮横向滚动 } from "../../工具/其他工具";
 
 const cmp_面板链接 = computed(() => {
   if (ref_配置.value.面板?.完整地址) {

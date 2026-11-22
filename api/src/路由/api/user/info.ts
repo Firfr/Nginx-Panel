@@ -56,7 +56,7 @@ app.post("/", async (c) => {
     throw new HTTPException(404, { message: 信息 });
   }
 
-  const 添加结果 = await fn账号信息.添加(请求体);
+  const 添加结果 = await fn账号信息.添加(structuredClone(请求体));
 
   if (!添加结果.状态) {
     let 信息 = `用户【${请求体.用户名}】写入失败！`;
@@ -151,7 +151,7 @@ app.put("/:用户名", async (c) => {
     throw new HTTPException(400, { message: 校验结果.信息 });
   }
 
-  const 更新结果 = await fn账号信息.修改(用户名, 请求体.TOTP, 更新数据);
+  const 更新结果 = await fn账号信息.修改(用户名, 请求体.TOTP, structuredClone(更新数据));
 
   if (!更新结果.状态) {
     let 信息 = `用户【${用户名}】写入失败！`;

@@ -1,8 +1,8 @@
 import type { FormRules } from "element-plus";
-import { cmp_当前文件列表_无后缀, rea_菜单内容数据, ref_账号总览, ref_配置 } from "../全局共享数据";
+import { cmp_当前文件列表_无后缀, rea_菜单内容数据, ref_账号总览 } from "../全局共享数据";
 import type { t_菜单 } from "../类型";
 import { fn发送请求 } from "./请求";
-import type { t_证书信息, t_账号总览信息, t_配置 } from "@公共代码/类型";
+import type { t_证书信息, t_账号总览信息 } from "@公共代码/类型";
 
 export const fn获取配置后缀 = (文件名: string) => {
   if (!文件名) return "";
@@ -48,16 +48,6 @@ export const fn获取账号总览列表 = async (刷新: boolean = false) => {
   } else {
     ElMessage.success(`账号总览列表获取成功！`);
   }
-
-  return 请求结果.内容;
-};
-
-export const fn获取配置 = async () => {
-  const 请求结果 = await fn发送请求<t_配置>("get", `/config`);
-
-  if (!请求结果.状态) return false;
-
-  ref_配置.value = 请求结果.内容;
 
   return 请求结果.内容;
 };

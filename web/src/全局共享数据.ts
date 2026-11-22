@@ -2,6 +2,7 @@ import { computed, reactive, ref } from "vue";
 import type { t_菜单, t_菜单名称 } from "./类型";
 import { fn获取菜单文件列表 } from "./工具/其他工具";
 import type { t_证书信息, t_账号总览信息, t_配置 } from "@公共代码/类型";
+import { fn发送请求 } from "./工具/请求";
 
 export const const_菜单列表: t_菜单[] = [
   { 名称: "账号", 路径: "user", 描述: "用户名列表" },
@@ -17,6 +18,16 @@ export const const_菜单列表对象: Record<t_菜单名称, t_菜单> = Object
 ) as Record<t_菜单名称, t_菜单>;
 
 export const ref_配置 = ref<t_配置>({ 端口: 0 });
+const fn获取配置 = async () => {
+  const 请求结果 = await fn发送请求<t_配置>("get", `/config`);
+
+  if (!请求结果.状态) return false;
+
+  ref_配置.value = 请求结果.内容;
+
+  return 请求结果.内容;
+};
+fn获取配置();
 
 export const ref_选中菜单 = ref<t_菜单 | null>(null);
 
@@ -71,7 +82,8 @@ export const const_示例 = {
   listen 端口;
   # 监听 IPv6
   # listen [::]:端口;
-  #server_name 域名，多个空格分割，可不写;
+  # 域名，多个空格分割，可不写
+  # server_name 域名;
   # 静态文件实际存放路径
   root /data/static/项目名称;
   # 首页文件名称
@@ -82,7 +94,8 @@ export const const_示例 = {
   listen 端口;
   # 监听 IPv6
   # listen [::]:端口;
-  server_name 域名;
+  # 域名，多个空格分割，可不写
+  # server_name 域名;
 
   # 请求体的最大允许大小
   client_max_body_size 10G;
@@ -210,7 +223,7 @@ export const const_示例 = {
     return 503 "认证服务不可用";
   }
 
-  # 受保护站点：先认证，再代理
+  # 受保护站点
   location / {
     auth_request /auth/verify;
     
@@ -218,6 +231,8 @@ export const const_示例 = {
     error_page 403 = @login;
 
     error_page 500 502 503 504 = @auth_error;
+
+    # 站点本身配置
 
     proxy_pass 站点地址;
   }

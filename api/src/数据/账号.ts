@@ -19,15 +19,17 @@ export const fn账号信息 = {
   查找: (用户名: string) => structuredClone(账号信息映射.get(用户名)),
   用户名列表: () => structuredClone([...账号信息映射.keys()]),
   用户列表: () => structuredClone([...账号信息映射.values()]),
-  添加: async (账号信息: t_账号信息) => {
+  添加: async (参数_账号信息: t_账号信息) => {
+    const 账号信息 = structuredClone(参数_账号信息);
     账号信息映射.set(账号信息.用户名, 账号信息);
     return await 保存();
   },
   修改: async (
     用户名: string,
     TOTP: boolean,
-    账号信息: Partial<t_账号信息>,
+    参数_账号信息: Partial<t_账号信息>,
   ): Promise<t_返回<string>> => {
+    const 账号信息 = structuredClone(参数_账号信息);
     if (!账号信息映射.has(用户名)) {
       return { 状态: false, 信息: `用户 [${用户名}] 不存在` };
     }

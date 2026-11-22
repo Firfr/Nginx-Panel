@@ -124,6 +124,11 @@ app.post("/", async (c) => {
   const 密码加盐 = fn计算哈希256(`${用户信息.用户名}:${用户信息.密码}:${请求体.盐}`);
   if (密码加盐 !== 请求体.密码) {
     const 信息 = `密码错误！`;
+    log.trace({
+      请求体: 请求体,
+      用户信息: 用户信息,
+      密码加盐: 密码加盐,
+    });
     log.error(信息);
     throw new HTTPException(401, { message: 信息 });
   }
